@@ -1,0 +1,68 @@
+$primary-color: #007acc;
+$dark-primary-color: darken($primary-color, 10%);
+
+html,body {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(224, 241, 251);
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.add-task {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}
+
+.task-list {
+  margin-top: 20px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.stats {
+  margin-top: 20px;
+  text-align: center;
+}
