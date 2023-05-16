@@ -1,17 +1,11 @@
-# ToDoList
+# Design
 
-This is a simple ToDoList application built with VueJS. Users can add, edit, and delete tasks, and mark them as completed or not completed.
+This is a  list of designs built with VueJS. Users can view different designs and also add design
 
-# [DEMO](https://softpro-todo-list.vercel.app/)
+# [DEMO](https://vue3-test-designn-3s22.vercel.app/)
 
 ## Features
-
-- Add tasks to the list
-- Edit existing tasks
-- Delete tasks
-- Mark tasks as completed or not completed
-- View the list of completed tasks
-- LocalStorage support to persist the tasks across page reloads
+- Add design
 
 ## Usage
 - Clone this repository to your local machine
@@ -19,4 +13,3 @@ This is a simple ToDoList application built with VueJS. Users can add, edit, and
 - Run npm install to install dependencies
 - Run npm run dev to start the development server
 - Open http://localhost:5173 in your browser to view the app
-https://vue3-test-designn-3s22.vercel.app/
