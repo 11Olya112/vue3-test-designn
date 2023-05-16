@@ -4,12 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  // ...
-}
-</script>
+<script></script>
 
-<style scoped>
-/* Стилі вашого компонента */
-</style>
+<style scoped></style>

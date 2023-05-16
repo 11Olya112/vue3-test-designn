@@ -12,7 +12,7 @@ body {
 
 .app {
   margin: 0 auto;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Roboto", sans-serif;
   display: flex;
 }
 
@@ -59,6 +59,7 @@ h1 {
   align-items: center;
 
   &__text {
+    font-family: "Roboto", sans-serif;
     color: #699707;
     font-weight: 400;
     font-size: 14px;
@@ -89,19 +90,11 @@ h1 {
       color: #e61610;
     }
   }
-}
 
-.add-task {
-  display: flex;
-  align-items: center;
-}
-
-input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  margin-right: 10px;
+  &__button:hover {
+    background-color: #2c70d1;
+    transition: 0.5s;
+  }
 }
 
 button {
@@ -109,34 +102,4 @@ button {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-}
-
-.error {
-  color: red;
-}
-
-.task-list {
-  margin-top: 20px;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.done {
-  text-decoration: line-through;
-}
-
-.stats {
-  margin-top: 20px;
-  text-align: center;
 }

@@ -24,7 +24,11 @@
           <button class="header__button--delete" style="width: 131px">
             Видалити
           </button>
-          <button class="header__button" style="width: 131px">
+          <button
+            class="header__button"
+            style="width: 131px"
+            @click="saveAndExit"
+          >
             Зберегти і вийти
           </button>
         </div>
@@ -35,38 +39,29 @@
           <img
             src="../../public/images/image.svg"
             alt="Add Design"
-            style="margin: 0 20px 40px 0px; max-width: 200px; max-height: 200px"
+            class="image"
           />
-
-          <img
-            :src="selectedPhoto"
-            alt="Selected Photo"
-            style="
-              max-width: 200px;
-              max-height: 200px;
-              margin-right: 20px;
-              margin-bottom: 40px;
-            "
-            v-if="selectedPhoto"
-          />
-
-          <img
-            :src="additionalPhoto"
-            alt="Additional Photo"
-            style="
-              max-width: 200px;
-              max-height: 200px;
-              margin-right: 20px;
-              margin-bottom: 120px;
-            "
-            v-if="additionalPhoto"
-          />
+          <div
+            v-for="(photo, index) in computedPhotos"
+            :key="photo.id"
+            style="display: inline"
+          >
+            <img
+              :src="photo.url"
+              alt="Selected Photo"
+              :style="imageStyle"
+              @click="openPhoto(index)"
+            />
+            <span class="delete-icon" @click="deletePhoto(index)">
+              <img src="../../public/images/delete.svg" alt="Delete icon" />
+            </span>
+          </div>
 
           <img
             src="../../public/images/addPicture.svg"
             alt="Add Design"
-            style="margin-bottom: 120px"
-            @click="addPhoto"
+            style="margin-bottom: 140px"
+            @click="addMorePhotos"
           />
 
           <input
@@ -75,13 +70,14 @@
             style="display: none"
             accept="image/*"
             @change="handleFileChange"
+            multiple
           />
         </div>
 
         <br /><br />
         <input
           type="text"
-          style="width: 80px; height: 32px"
+          style="width: 80px; height: 32px; margin-right: 8px;"
           placeholder="###"
           class="main__input"
         />
@@ -106,30 +102,65 @@
 export default {
   data() {
     return {
-      selectedPhoto: null,
+      photos: [],
+      selectedPhotoIndex: -1,
     };
   },
+  computed: {
+    computedPhotos() {
+      return [...this.photos];
+    },
+    imageStyle() {
+      return {
+        borderRadius: "3px",
+        marginRight: "8px",
+        width: "120px",
+        height: "149px",
+        marginBottom: "115px",
+        cursor: "pointer",
+      };
+    },
+  },
   methods: {
-    addPhoto() {
-      // Коли користувач натисне на зображення
-      // Тригеруємо клік на прихований input file
+    addMorePhotos() {
       this.$refs.fileInput.click();
     },
-    handleFileChange(event) {
-      // Отримуємо вибраний файл з input file
-      const file = event.target.files[0];
-
-      // Можете виконати додаткові дії з файлом тут,
-      // наприклад, завантажити його на сервер або обробити його яким-небудь способом
-
-      // Відображення вибраної фотографії
-      this.selectedPhoto = URL.createObjectURL(file);
+    async handleFileChange() {
+      const { files } = this.$refs.fileInput;
+      for (const file of files) {
+        const photoUrl = URL.createObjectURL(file);
+        const photoId = this.photos.length + 1;
+        this.photos.push({ id: photoId, url: photoUrl });
+      }
+    },
+    saveAndExit() {
+      this.$emit("save-and-exit", this.computedPhotos);
+    },
+    deletePhoto(index) {
+      this.computedPhotos.splice(index, 1);
+    },
+    openPhoto(index) {
+      this.selectedPhotoIndex = index;
     },
   },
 };
 </script>
 
 <style scoped>
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 4px;
+}
+
+.delete-icon img {
+  width: 16px;
+  height: 16px;
+}
+
 .main {
   margin-top: 40px;
 }
@@ -153,7 +184,7 @@ input::placeholder {
   --width: 64px;
   --height: 24px;
 
-  --offset: 20px;
+  --offset: 2px;
   cursor: pointer;
 }
 
@@ -198,5 +229,14 @@ input::placeholder {
 
 .main {
   margin: 40px 120px;
+}
+
+.image {
+  margin-right: 8px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  width: 120px;
+  height: 223px;
+  border-radius: 3px;
 }
 </style>
